@@ -426,9 +426,11 @@ Inventory::_AddBIOSInfo()
 	tinyxml2::XMLElement* bios = fDocument->NewElement("BIOS");
 	fContent->LinkEndChild(bios);
 
-	tinyxml2::XMLElement* assettag = fDocument->NewElement("ASSETTAG");
-	assettag->LinkEndChild(fDocument->NewText(gComponents["CHASSIS"].fields["asset_tag"].c_str()));
-	bios->LinkEndChild(assettag);
+	// Not import Chassis Asset Tag - remove value
+
+	// tinyxml2::XMLElement* assettag = fDocument->NewElement("ASSETTAG");
+	// assettag->LinkEndChild(fDocument->NewText(gComponents["CHASSIS"].fields["asset_tag"].c_str()));
+	// bios->LinkEndChild(assettag);
 
 	tinyxml2::XMLElement* bdate = fDocument->NewElement("BDATE");
 	bdate->LinkEndChild(fDocument->NewText(gComponents["BIOS"].fields["release_date"].c_str()));
@@ -473,10 +475,17 @@ Inventory::_AddBIOSInfo()
 	ssn->LinkEndChild(fDocument->NewText(systemSerial.c_str()));
 	bios->LinkEndChild(ssn);
 
-	tinyxml2::XMLElement* type = fDocument->NewElement("TYPE");
-	type->LinkEndChild(fDocument->NewText(gComponents["CHASSIS"].fields["type"].c_str()));
-	bios->LinkEndChild(type);
+	// tinyxml2::XMLElement* type = fDocument->NewElement("TYPE");
+	// type->LinkEndChild(fDocument->NewText(gComponents["CHASSIS"].fields["type"].c_str()));
+	// bios->LinkEndChild(type);
 
+	// Insert always Thinclient as Type 
+	std::string TCType;
+        TCType="ThinClient";
+        tinyxml2::XMLElement* type = fDocument->NewElement("TYPE");
+        type->LinkEndChild(fDocument->NewText(TCType.c_str()));
+        bios->LinkEndChild(type);
+	
 	Logger::Log(LOG_DEBUG, "\tAdded BIOS Info!");
 }
 
