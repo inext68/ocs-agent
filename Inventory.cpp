@@ -1076,9 +1076,9 @@ Inventory::_AddUsersInfo()
 		domain->LinkEndChild(fDocument->NewText(userEntry.logindomain.c_str()));
 		users->LinkEndChild(domain);
 
-		tinyxml2::XMLElement* login = fDocument->NewElement("LOGIN");
-		login->LinkEndChild(fDocument->NewText(userEntry.login.c_str()));
-		users->LinkEndChild(login);
+		// tinyxml2::XMLElement* login = fDocument->NewElement("LOGIN");
+		// login->LinkEndChild(fDocument->NewText(userEntry.login.c_str()));
+		// users->LinkEndChild(login);
 	}
 
 	Logger::Log(LOG_DEBUG, "\tAdded User info!");
